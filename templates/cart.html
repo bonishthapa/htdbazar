@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
   <div class="site-wrap">
-      
+
     <div class="bg-light py-3">
       <div class="container">
         <div class="row">
@@ -27,7 +27,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                {% for order in cart %}
+                {% for order in object.product.all %}
                   <tr>
                     <td class="product-thumbnail">
                       <img src="{{order.product.image.url}}" alt="Image" class="img-fluid">
@@ -39,19 +39,19 @@
                     <td>
                       <div class="input-group mb-3" style="max-width: 120px;">
                         <div class="input-group-prepend">
-                          <a href="" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</a>
+                          <a href="{{ order.product.get_decrease_from_cart_url }}" class="btn btn-outline-primary js-btn-minus" type="button">&minus;</a>
                         </div>
-                        
+
                         <input type="text" class="form-control text-center" value="{{order.quantity}}" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
                         <div class="input-group-append">
-                          <a href="{{ object.get_add_to_cart_url }}" class="btn btn-outline-primary " >&plus;</a>
+                          <a href="{{ order.product.get_add_to_cart_url }}" class="btn btn-outline-primary " >&plus;</a>
                         </div>
                       </div>
                     </td>
                     <td>${{order.get_total_price}}</td>
-                    <td><a href="#" class="btn btn-primary height-auto btn-sm">X</a></td>
+                    <td><a href="{{ order.product.get_remove_item_url }}" class="btn btn-primary height-auto btn-sm">X</a></td>
                   </tr>
-                {% endfor %} 
+                {% endfor %}
                 </tbody>
               </table>
             </div>
@@ -65,7 +65,7 @@
                 <button class="btn btn-primary btn-sm btn-block">Update Cart</button>
               </div>
               <div class="col-md-6">
-                <button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button>
+                <a href="{% url 'index' %}"><button class="btn btn-outline-primary btn-sm btn-block">Continue Shopping</button></a>
               </div>
             </div>
             <div class="row">

@@ -20,7 +20,7 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
-    
+
     def get_absolute_url(self):
         return reverse("product-detail", kwargs={
             'slug': self.slug
@@ -34,6 +34,11 @@ class Product(models.Model):
             'slug': self.slug
         })
 
+    def get_decrease_from_cart_url(self):
+        return reverse("decrease-from-cart", kwargs={
+           'slug': self.slug
+       })
+
 
 class OrderProduct(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True, blank=True)
@@ -45,7 +50,7 @@ class OrderProduct(models.Model):
         return f"{self.quantity} of {self.product.name}"
 
     def get_total_price(self):
-        return self.quantity * self.product.price    
+        return self.quantity * self.product.price
 
 class Order(models.Model):
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
@@ -56,4 +61,3 @@ class Order(models.Model):
 
     def __str__(self):
         return self.user.username
-    
