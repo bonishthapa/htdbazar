@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-{% load static %}  
+{% load static %}
 {% block content %}
   <div class="site-wrap">
     <div class="site-blocks-cover" data-aos="fade">
@@ -13,7 +13,7 @@
             </div>
           </div>
           <div class="col-md-6 order-1 align-self-end">
-            <img src="images/model_3.png" alt="Image" class="img-fluid">
+            <img src="{% static 'images/model_3.png' %}" alt="Image" class="img-fluid">
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@
     </div>
 
 
-    
+
     <div class="site-section">
       <div class="container">
         <div class="row">
@@ -235,13 +235,12 @@
             </div>
           </div>
           <div class="col-md-6 order-1 align-self-end">
-            <img src="images/model_6.png" alt="Image" class="img-fluid">
+            <img src="{% static 'images/model_6.png' %}" alt="Image" class="img-fluid">
           </div>
         </div>
       </div>
     </div>
 
-    
+
   </div>
 {% endblock %}
- 
