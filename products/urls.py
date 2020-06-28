@@ -14,4 +14,5 @@ urlpatterns = [
     path('logout', LogoutUser, name="logout"),
     path('register', UserRegister, name="register"),
     path('cart', CartViews.as_view(), name ="cart" ),
+    path('checkout', CheckOutView.as_view(), name="checkout"),
 ]

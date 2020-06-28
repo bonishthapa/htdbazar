@@ -4,10 +4,11 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.generic import ListView, DetailView, View
 from .models import Product, OrderProduct, Order
 from django.utils import timezone
-from .forms import CreationUser
+from .forms import CreationUser, CheckOutForm
 from django.contrib.auth import authenticate, login ,logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
+
 
 # Create your views here.
 
@@ -144,3 +145,26 @@ def UserRegister(request):
     'form' : form
     }
     return render(request,'account/register.html', context)
+
+
+
+class CheckOutView(View):
+    def get(self, *args, **kwargs):
+        form = CheckOutForm()
+        context = {
+        'form' : form
+        }
+        return render(self.request,'checkout.html',context)
+    def post(self, *args,**kwargs):
+        form = CheckOutForm(self.request.POST or None)
+        if form.is_valid():
+            print('form is valid')
+            return redirect('/')
+
+
+
+    # order = Order.objects.get(user=self.request.user, ordered=False)
+    # context = {
+    # 'order' : order
+    # }
+    # return render(request,'checkout.html', context)
